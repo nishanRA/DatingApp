@@ -5,21 +5,23 @@ using DatingApp.API.Models;
 
 namespace DatingApp.API.Helpers
 {
-    public class AutoMapperProfiles:Profile
+    public class AutoMapperProfiles : Profile
     {
         public AutoMapperProfiles()
         {
-            CreateMap<User,UserForListDto>()
-            .ForMember(dest => dest.PhotoUrl, opt => 
+            CreateMap<User, UserForListDto>()
+            .ForMember(dest => dest.PhotoUrl, opt =>
             opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.Ismain).Url))
-            .ForMember(dest => dest.Age,opt => 
-            opt.MapFrom(src => src.DateOfBirth.CalculateAge()));
-            CreateMap<User,UserForDetailedDto>()
-            .ForMember(dest => dest.PhotoUrl, opt => 
+            .ForMember(dest => dest.Age, opt =>
+             opt.MapFrom(src => src.DateOfBirth.CalculateAge()));
+            CreateMap<User, UserForDetailedDto>()
+            .ForMember(dest => dest.PhotoUrl, opt =>
             opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.Ismain).Url))
-            .ForMember(dest => dest.Age,opt => 
-            opt.MapFrom(src => src.DateOfBirth.CalculateAge()));
-            CreateMap<Photo,PhotosForDetailedDto>();
+            .ForMember(dest => dest.Age, opt =>
+             opt.MapFrom(src => src.DateOfBirth.CalculateAge()));
+            CreateMap<Photo, PhotosForDetailedDto>();
+
+            CreateMap<UserForUpdateDto,User>();
         }
     }
 }
